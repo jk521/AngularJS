@@ -2,9 +2,91 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>789</title>
+		<title>angular</title>
 	</head>
-	<body>
+	<body ng-app>
+		<div ng-controller="HelloController">
+			<p>{{greeting.text}},everybody everyone</p>
+			<p>{{someText}}</p>	
+			<p>{{message.someText}}</p>
+			<hr />
+			<form>
+				Starting:<input ng-change="computeNeed()" ng-model="funding.startingEstimate"/>
+			    Recommendation:{{needed}}
+			 </form>
+		</div>
+		<hr />
+		<ul ng-controller="lists">
+			<li ng-repeat="arr in arrs">{{arr}}</li>
+		</ul>
 		
+		<hr />
+		<div ng-controller="prices">
+			<b>Invoice:</b>
+	        <br>
+	        <br>
+	        <table>
+	            <tr><td>Quantity</td><td>Cost</td></tr>
+	            <tr>
+	                <td><input type="integer" min="0" ng-model="qty" required ></td>
+	                <td><input type="number" ng-model="cost" required ></td>
+	            </tr>
+	        </table>
+	        <hr>
+	        <b>Total:</b> {{qty * cost | currency: "RMB ￥"}}
+		</div>
+		
+		
+		<hr />
+		
+		<div ng-controller="ctrl1">
+			<select name="" id="">
+				<option value="">请选择</option>
+				<option ng-repeat="item in items.opts">{{item}}</option>
+			</select>
+			<br/>
+			{{wish}}
+			<br/>
+			<br/>
+			Hello <input ng-model='wish'> <hr/>
+			<span ng:bind="wish"></span> <br/>
+			<span ng_bind="wish"></span> <br/>
+			<span ng-bind="wish"></span> <br/>
+			<span data-ng-bind="wish"></span> <br/>
+			<span x-ng-bind="wish"></span> <br/>
+		</div>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		var someText="You have started your journey.";
+		var message={};
+		message.someText="You have started your journey.";
+		function HelloController($scope){
+            $scope.greeting={text:"Hello"};
+            $scope.someText=someText;
+            $scope.message=message;
+            $scope.funding={startingEstimate:0};
+	        var computeNeed=function(){
+              $scope.needed=$scope.funding.startingEstimate*10;
+         	}
+	        $scope.$watch("funding.startingEstimate",computeNeed)
+        }
+		
+		function lists($scope){
+			$scope.arrs=[1,3,5,7,9]
+		}
+		
+		function prices($scope){
+			$scope.qty = 1;
+		    $scope.cost = 13.68;
+		}
+		
+		function ctrl1 ($scope){
+			$scope.wish='I love you',
+			$scope.items={
+				name:5689,
+				opts:[1,2,3,4,5,6]
+			}
+		}
+	</script>
 	</body>
 </html>
