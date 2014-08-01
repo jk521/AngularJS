@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>angular</title>
+	</head>
+	<body ng-app>
+		
+		<div ng-controller="ownCont">
+			{{name | uppercase}}
+			1+2={{1+2}}
+			{{3*10 | currency}}
+			{{123.234 | number:2}}
+			<br />
+			Name: <input ng-model="name" type="text"/>
+			<br />
+			<button ng-click="greet()">Beautiful</button>
+			<br />
+			<!--{{jk();}}-->
+		</div>
+		
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script>
+		function ownCont ($window,$scope){
+			$scope.name = "alone";
+			$scope.jk=function(){
+				alert(99);
+			}
+			$scope.greet = function() {
+				($window.mockWindow || $window).alert('Hello ' + $scope.name);
+			}
+			
+		}
+	</script>
+	</body>
+</html>
